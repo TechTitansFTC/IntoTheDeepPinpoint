@@ -26,6 +26,9 @@ public class Functions {
     };
     SpecimenScoreState specimenScore = SpecimenScoreState.SPECIMEN_PREP;
 
+    public final String[] MAKESHIFT = {"DOWN", "CLOSE", "UP", "SCORE"};
+    public int MAKESHIFT_pos = 0;
+
     public Functions (HardwareMap map) {
         slides = new Differential(map);
         intake = new Intake(map);
@@ -107,6 +110,44 @@ public class Functions {
                 //TODO: add the code to retract to pos where pickup starts from
                 break;
         }
+    }
+
+
+    public String MAKESHIFT(boolean up, boolean down) {
+        // {"DOWN", "CLOSE", "UP", "SCORE"}
+        boolean advance = false;
+        switch (MAKESHIFT_pos) {
+            case 0:
+                //TODO: code to make it go down (need to code in outtake)
+                if (up) {
+                    advance = true;
+                }
+                break;
+            case 1:
+                outtake.clawClose();
+                if (outtake.getClawClosed()) {
+                    advance = true;
+                }
+                break;
+            case 2:
+
+                if (down) {
+                    advance = true;
+                }
+                break;
+            case 3:
+
+                if (!outtake.getClawClosed()) {
+                    MAKESHIFT_pos = 0;
+                }
+                break;
+        }
+
+        if (advance) {
+            MAKESHIFT_pos++;
+        }
+
+        return MAKESHIFT[MAKESHIFT_pos];
     }
 
     public void slideControl (boolean up, boolean down, boolean out, boolean in) {
