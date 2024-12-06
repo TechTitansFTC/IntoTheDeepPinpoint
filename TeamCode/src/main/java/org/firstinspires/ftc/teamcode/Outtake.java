@@ -28,12 +28,12 @@ public class Outtake {
     private final double CLAW_OPEN = 0.45;//open claw
 
     public Outtake(HardwareMap m){
-        this.shoulderL = m.servo.get("rotateML");
-        this.shoulderR = m.servo.get("rotateMR");
-        this.elbowL = m.servo.get("elbowL");
-        this.elbowR = m.servo.get("elbowR");
-        this.wrist = m.servo.get("wrist");
-        this.claw = m.servo.get("claw");
+        this.shoulderL = m.servo.get("rotateML"); //port 6 CH
+        this.shoulderR = m.servo.get("rotateMR"); //port 0 EH
+        this.elbowL = m.servo.get("elbowL"); //port 5 CH
+        this.elbowR = m.servo.get("elbowR"); //port 1 EH
+        this.wrist = m.servo.get("wrist"); //port 2 CH
+        this.claw = m.servo.get("claw"); //port 1 CH
     }
 
     public void init() {
