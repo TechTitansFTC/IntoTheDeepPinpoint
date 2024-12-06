@@ -139,7 +139,7 @@ public class Functions {
                     case 3:
                         break;
                 }
-                if (up) {
+                if (up && lower_pos == 3) {
                     advance = true;
                 }
                 break;
@@ -147,15 +147,10 @@ public class Functions {
                 outtake.clawClose();
                 if (outtake.getClawClosed()) {
                     advance = true;
+                    raise_pos = 0;
                 }
                 break;
             case 2:
-
-                if (down) {
-                    advance = true;
-                }
-                break;
-            case 3:
                 //TODO: code to make it go up (need to code in outtake)
                 switch (raise_pos) {
                     case 0:
@@ -175,6 +170,12 @@ public class Functions {
                     case 3:
                         break;
                 }
+                if (down && raise_pos == 3) {
+                    advance = true;
+                }
+                break;
+            case 3:
+
                 if (!outtake.getClawClosed()) {
                     MAKESHIFT_pos = 0;
                     lower_pos = 0;
