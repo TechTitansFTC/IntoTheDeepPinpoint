@@ -66,6 +66,10 @@ public class Outtake {
     public void setElbow(int input) {
 
     }
+
+    public boolean checkElbow(int input) {
+        return true;
+    }
     public void elbowOut(){
         elbowL.setPosition(ELBOW_L_OUT);
         elbowR.setPosition(ELBOW_R_OUT);

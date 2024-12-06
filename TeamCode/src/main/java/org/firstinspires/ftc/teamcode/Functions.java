@@ -28,6 +28,8 @@ public class Functions {
 
     public final String[] MAKESHIFT = {"DOWN", "CLOSE", "UP", "SCORE"};
     public int MAKESHIFT_pos = 0;
+    public int lower_pos = 0;
+    public int raise_pos = 0;
 
     public Functions (HardwareMap map) {
         slides = new Differential(map);
@@ -119,6 +121,24 @@ public class Functions {
         switch (MAKESHIFT_pos) {
             case 0:
                 //TODO: code to make it go down (need to code in outtake)
+                switch (lower_pos) {
+                    case 0:
+                        outtake.setElbow(1); // needs to be changed
+                        lower_pos++;
+                        break;
+                    case 1:
+                        outtake.wristUp();
+                        if (outtake.checkElbow(1)) {
+                            lower_pos++;
+                        }
+                        break;
+                    case 2:
+                        outtake.setElbow(2); // needs to be set
+                        lower_pos = 3;
+                        break;
+                    case 3:
+                        break;
+                }
                 if (up) {
                     advance = true;
                 }
@@ -136,9 +156,28 @@ public class Functions {
                 }
                 break;
             case 3:
-
+                //TODO: code to make it go up (need to code in outtake)
+                switch (raise_pos) {
+                    case 0:
+                        outtake.setElbow(3); // needs to be changed
+                        raise_pos++;
+                        break;
+                    case 1:
+                        outtake.wristUp();
+                        if (outtake.checkElbow(3)) {
+                            raise_pos++;
+                        }
+                        break;
+                    case 2:
+                        outtake.setElbow(4); // needs to be set
+                        raise_pos = 3;
+                        break;
+                    case 3:
+                        break;
+                }
                 if (!outtake.getClawClosed()) {
                     MAKESHIFT_pos = 0;
+                    lower_pos = 0;
                 }
                 break;
         }
