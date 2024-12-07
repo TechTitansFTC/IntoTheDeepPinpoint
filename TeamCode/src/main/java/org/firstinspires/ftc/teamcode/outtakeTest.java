@@ -20,7 +20,11 @@ public class outtakeTest extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) {return;}
         shoulderL.setDirection(Servo.Direction.FORWARD);
-        shoulderL.setDirection(Servo.Direction.FORWARD);
+        shoulderR.setDirection(Servo.Direction.FORWARD);
+        elbowL.setDirection(Servo.Direction.FORWARD);
+        elbowR.setDirection(Servo.Direction.FORWARD);
+        wrist.setDirection(Servo.Direction.FORWARD);
+        claw.setDirection(Servo.Direction.FORWARD);
         shoulderL.setPosition(0);
         shoulderR.setPosition(1);
         elbowR.setPosition(0);
