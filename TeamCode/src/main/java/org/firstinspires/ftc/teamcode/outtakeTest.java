@@ -24,7 +24,7 @@ public class outtakeTest extends LinearOpMode {
         shoulderL.setPosition(0);
         shoulderR.setPosition(1);
         elbowR.setPosition(0);
-        elbowL.setPosition(0);
+        elbowL.setPosition(1);
         wrist.setPosition(0);
         claw.setPosition(0);
         timer.reset();
@@ -96,11 +96,12 @@ public class outtakeTest extends LinearOpMode {
 
             telemetry.addData("Testing Servo", servos[testServoNum]);
 
-            telemetry.addData("pos", shoulderL.getPosition());
-            telemetry.addData("pos", shoulderR.getPosition());
-            telemetry.addData("pos", elbowL.getPosition());
-            telemetry.addData("pos", wrist.getPosition());
-            telemetry.addData("pos", claw.getPosition());
+            telemetry.addData("pos shoL", shoulderL.getPosition());
+            telemetry.addData("pos shoR", shoulderR.getPosition());
+            telemetry.addData("pos elbL", elbowL.getPosition());
+            telemetry.addData("pos elbR", elbowR.getPosition());
+            telemetry.addData("pos wr", wrist.getPosition());
+            telemetry.addData("pos cla", claw.getPosition());
             telemetry.update();
             if (gamepad1.right_bumper) {
                 timer.reset();
