@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.*;
+import org.firstinspires.ftc.teamcode.quickstartFiles.PinpointDrive;
 
 public class LocalizationTest extends LinearOpMode {
     @Override
