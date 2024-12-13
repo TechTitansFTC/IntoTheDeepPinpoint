@@ -26,34 +26,36 @@ public class outtakeTest extends LinearOpMode {
         wrist.setDirection(Servo.Direction.FORWARD);
         claw.setDirection(Servo.Direction.FORWARD);
 
+        while(opModeIsActive()){
+            if(gamepad1.a){
+                out.shoulderStart();
+            }
+            if(gamepad1.b){
+                out.elbowStart();
+            }
+            if(gamepad1.x){
+                out.elbowScore();
+            }
+            if(gamepad1.y){
+                out.shoulderScore();
+            }
+            if(gamepad1.left_bumper){
+                out.clawOpen();
+            }
+            if(gamepad1.right_bumper){
+                out.clawClose();
+            }
+            if(gamepad1.dpad_up){
+                out.wristScore();
+            }
+            if(gamepad1.dpad_down){
+                out.wristStart();
+            }
+            if(gamepad1.left_trigger >0){
+                out.shoulderPullDown();
+            }
+        }
 
-        if(gamepad1.a){
-            out.shoulderStart();
-        }
-        if(gamepad1.b){
-            out.elbowStart();
-        }
-        if(gamepad1.x){
-            out.elbowScore();
-        }
-        if(gamepad1.y){
-            out.shoulderScore();
-        }
-        if(gamepad1.left_bumper){
-            out.clawOpen();
-        }
-        if(gamepad1.right_bumper){
-            out.clawClose();
-        }
-        if(gamepad1.dpad_up){
-            out.wristScore();
-        }
-        if(gamepad1.dpad_down){
-            out.wristStart();
-        }
-        if(gamepad1.left_trigger >0){
-            out.shoulderPullDown();
-        }
 
 
 
