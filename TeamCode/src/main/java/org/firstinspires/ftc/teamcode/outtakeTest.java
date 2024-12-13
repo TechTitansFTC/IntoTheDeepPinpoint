@@ -4,34 +4,32 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import org.firstinspires.ftc.teamcode.Outtake;
 @TeleOp(group = "testing")
 public class outtakeTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Servo shoulderL = hardwareMap.get(Servo.class, "rotateML"); // main U-D
         Servo shoulderR = hardwareMap.get(Servo.class, "rotateMR"); // main U-D
-        Servo elbowL = hardwareMap.get(Servo.class, "elbowL"); // subset U-D
-        Servo elbowR = hardwareMap.get(Servo.class, "elbowR");
+        Servo elbow = hardwareMap.get(Servo.class, "elbow"); // subset U-D
         Servo wrist = hardwareMap.get(Servo.class, "wrist"); // L-R
         Servo claw = hardwareMap.get(Servo.class, "claw");
         ElapsedTime timer = new ElapsedTime();
-        String[] servos = {"Shoulders", "Elbows", "Wrist", "Claw"};
+        String[] servos = {"Shoulders", "Elbow", "Wrist", "Claw"};
 
         waitForStart();
         if (isStopRequested()) {return;}
         shoulderL.setDirection(Servo.Direction.FORWARD);
         shoulderR.setDirection(Servo.Direction.FORWARD);
-        elbowL.setDirection(Servo.Direction.FORWARD);
-        elbowR.setDirection(Servo.Direction.FORWARD);
+        elbow.setDirection(Servo.Direction.FORWARD);
         wrist.setDirection(Servo.Direction.FORWARD);
         claw.setDirection(Servo.Direction.FORWARD);
         shoulderL.setPosition(0);
         shoulderR.setPosition(1);
-        elbowR.setPosition(0);
-        elbowL.setPosition(1);
-        wrist.setPosition(0);
-        claw.setPosition(0);
+        elbow.setPosition(0.5);
+        wrist.setPosition(0.75);
+        claw.setPosition(0.0);
         timer.reset();
+
 
         int testServoNum = 0;
         while (opModeIsActive()) {
@@ -57,17 +55,15 @@ public class outtakeTest extends LinearOpMode {
                         break;
                     case 1:
                         if (gamepad1.dpad_up) {
-                            elbowL.setPosition(elbowL.getPosition() + 0.05);
-                            elbowR.setPosition(elbowR.getPosition() - 0.05);
+                            elbow.setPosition(elbow.getPosition() + 0.05);
                         } else if (gamepad1.dpad_down) {
-                            elbowL.setPosition(elbowL.getPosition() - 0.05);
-                            elbowR.setPosition(elbowR.getPosition() + 0.05);
+                            elbow.setPosition(elbow.getPosition() - 0.05);
                         } else if (gamepad1.dpad_right) {
-                            elbowL.setPosition(elbowL.getPosition() + 0.01);
-                            elbowR.setPosition(elbowR.getPosition() - 0.01);
+                            elbow.setPosition(elbow.getPosition() + 0.01);
+
                         } else if (gamepad1.dpad_left) {
-                            elbowL.setPosition(elbowL.getPosition() - 0.01);
-                            elbowR.setPosition(elbowR.getPosition() + 0.01);
+                            elbow.setPosition(elbow.getPosition() - 0.01);
+
                         }
                         break;
                     case 2:
@@ -102,11 +98,12 @@ public class outtakeTest extends LinearOpMode {
 
             telemetry.addData("pos shoL", shoulderL.getPosition());
             telemetry.addData("pos shoR", shoulderR.getPosition());
-            telemetry.addData("pos elbL", elbowL.getPosition());
-            telemetry.addData("pos elbR", elbowR.getPosition());
+            telemetry.addData("pos elbL", elbow.getPosition());
             telemetry.addData("pos wr", wrist.getPosition());
             telemetry.addData("pos cla", claw.getPosition());
             telemetry.update();
+
+
             if (gamepad1.right_bumper) {
                 timer.reset();
                 testServoNum += 1;

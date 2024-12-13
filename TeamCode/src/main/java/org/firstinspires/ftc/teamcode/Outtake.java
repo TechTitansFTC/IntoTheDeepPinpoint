@@ -6,57 +6,56 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Outtake {
     private Servo shoulderL; // main U-D
     private Servo shoulderR; // main U-D
-    private Servo elbowL; // subset U-D
-    private Servo elbowR;
+    private Servo elbow; // subset U-D
     private Servo wrist; // L-R
     private Servo claw;
 
-//TODO: FIND ALL SERVO VALUES
-    private final double SHOULDER_L_OUT = 0.0;//arm outside robot
-    private final double SHOULDER_L_IN = 0.0;//arm in robot
-    private final double SHOULDER_L_N = 0.0;//arm perpendicular
-    private final double SHOULDER_R_OUT = 0.0;//same but with other arm
-    private final double SHOULDER_R_IN = 0.0;
-    private final double SHOULDER_R_N = 0.0;
-    private final double ELBOW_L_OUT = 0.0;//forearm out(away from robot)
-    private final double ELBOW_L_IN = 0.0;//forearm in(towards robot)
-    private final double ELBOW_R_OUT = 0.0;
-    private final double ELBOW_R_IN = 0.0;
-    private final double WRIST_UP = .75;
-    private final double WRIST_DOWN = 0.1;
-    private final double CLAW_CLOSE = 0.6;//closes claw
-    private final double CLAW_OPEN = 0.45;//open claw
+    //TODO: FIND ALL SERVO VALUES
+    private final double SHOULDER_L_SCORE = 0.2;//arm outside robot
+    private final double SHOULDER_L_START = 1;//arm in robot
+
+    private final double SHOULDER_R_SCORE = 0.8;//same but with othe arm
+
+    private final double SHOULDER_R_START = 0.0;
+
+    private final double SHOULDER_R_PULLDOWN = 1;//same but with othe arm
+
+    private final double SHOULDER_L_PULLDOWN = 0.0;
+    private final double ELBOW_START= 0.0;
+    private final double ELBOW_SCORE= 0.95;
+    private final double WRIST_SCORE = 0.09;
+    private final double WRIST_START = 0.73;
+    private final double CLAW_CLOSE = 0.5;//closes claw
+    private final double CLAW_OPEN = 0.0;//open claw
 
     public Outtake(HardwareMap m){
         this.shoulderL = m.servo.get("rotateML"); //port 6 CH
         this.shoulderR = m.servo.get("rotateMR"); //port 0 EH
-        this.elbowL = m.servo.get("elbowL"); //port 5 CH
-        this.elbowR = m.servo.get("elbowR"); //port 1 EH
+        this.elbow = m.servo.get("elbow"); //port 5 CH
         this.wrist = m.servo.get("wrist"); //port 2 CH
         this.claw = m.servo.get("claw"); //port 1 CH
     }
 
     public void init() {
-        shoulderL.setPosition(SHOULDER_L_N);
-        shoulderR.setPosition(SHOULDER_R_N);
-        elbowL.setPosition(ELBOW_L_IN);
-        elbowR.setPosition(ELBOW_R_IN);
-        wrist.setPosition(WRIST_UP);
+        shoulderL.setPosition(SHOULDER_L_START);
+        shoulderR.setPosition(SHOULDER_R_START);
+        elbow.setPosition(ELBOW_START);
+        wrist.setPosition(CLAW_CLOSE);
         claw.setPosition(CLAW_OPEN);
     }
 
-    public void shoulderOut(){
-        shoulderL.setPosition(SHOULDER_L_OUT);
-        shoulderR.setPosition(SHOULDER_R_OUT);
+    public void shoulderScore(){
+        shoulderL.setPosition(SHOULDER_L_SCORE);
+        shoulderR.setPosition(SHOULDER_R_SCORE);
     }
-    public void shoulderIn(){
-        shoulderL.setPosition(SHOULDER_L_IN);
-        shoulderR.setPosition(SHOULDER_R_IN);
+    public void shoulderStart(){
+        shoulderL.setPosition(SHOULDER_L_START);
+        shoulderR.setPosition(SHOULDER_R_START);
     }
 
-    public void elbowIn(){
-        elbowL.setPosition(ELBOW_L_IN);elbowR.setPosition(ELBOW_R_IN);
-    }
+//    public void elbowIn(){
+//        elbow.setPosition(ELBOW_90);
+//    }
 
     /**
      * set elbow to a specific spot
@@ -71,15 +70,14 @@ public class Outtake {
         return true;
     }
     public void elbowOut(){
-        elbowL.setPosition(ELBOW_L_OUT);
-        elbowR.setPosition(ELBOW_R_OUT);
+
     }
 
-    public void wristUp(){
-        wrist.setPosition(WRIST_UP);
+    public void wristScore(){
+        wrist.setPosition(WRIST_SCORE);
     }
-    public void wristDown(){
-        wrist.setPosition(WRIST_DOWN);
+    public void wristStart(){
+        wrist.setPosition(WRIST_START);
     }
 
     public void clawClose(){
@@ -87,6 +85,13 @@ public class Outtake {
     }
     public void clawOpen(){
         claw.setPosition(CLAW_OPEN);
+    }
+
+    public void elbowStart(){
+        elbow.setPosition(elbowStart());
+    }
+    public void elbowScore(){
+        elbow.setPosition(ELBOW_SCORE);
     }
 
     public boolean getClawClosed() {

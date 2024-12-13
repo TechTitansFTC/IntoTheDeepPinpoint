@@ -50,7 +50,7 @@ public class Functions {
     start -> send to down (need to change function)
     extend -> need code
     pickup -> if within range (probably needs to be moved to extend), then if extended, then close the claw
-    retract -> need code (bring the outtake back into the robot with specimen on)
+    retract -> need code (bring the Outtake back into the robot with specimen on)
     raise -> send up (need to change function)
     prep -> prep for scoring (needs code)
      */
@@ -120,14 +120,14 @@ public class Functions {
         boolean advance = false;
         switch (MAKESHIFT_pos) {
             case 0:
-                //TODO: code to make it go down (need to code in outtake)
+                //TODO: code to make it go down (need to code in Outtake)
                 switch (lower_pos) {
                     case 0:
                         outtake.setElbow(1); // needs to be changed
                         lower_pos++;
                         break;
                     case 1:
-                        outtake.wristUp();
+                        outtake.wristScore();
                         if (outtake.checkElbow(1)) {
                             lower_pos++;
                         }
@@ -151,14 +151,14 @@ public class Functions {
                 }
                 break;
             case 2:
-                //TODO: code to make it go up (need to code in outtake)
+                //TODO: code to make it go up (need to code in Outtake)
                 switch (raise_pos) {
                     case 0:
                         outtake.setElbow(3); // needs to be changed
                         raise_pos++;
                         break;
                     case 1:
-                        outtake.wristUp();
+                        outtake.wristScore();
                         if (outtake.checkElbow(3)) {
                             raise_pos++;
                         }
