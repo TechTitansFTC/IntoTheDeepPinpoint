@@ -115,82 +115,82 @@ public class Functions {
     }
 
 
-    public String MAKESHIFT(boolean up, boolean down) {
-        // {"DOWN", "CLOSE", "UP", "SCORE"}
-        boolean advance = false;
-        switch (MAKESHIFT_pos) {
-            case 0:
-                //TODO: code to make it go down (need to code in Outtake)
-                switch (lower_pos) {
-                    case 0:
-                        outtake.setElbow(1); // needs to be changed
-                        lower_pos++;
-                        break;
-                    case 1:
-                        outtake.wristScore();
-                        if (outtake.checkElbow(1)) {
-                            lower_pos++;
-                        }
-                        break;
-                    case 2:
-                        outtake.setElbow(2); // needs to be set
-                        lower_pos = 3;
-                        break;
-                    case 3:
-                        break;
-                }
-                if (up && lower_pos == 3) {
-                    advance = true;
-                }
-                break;
-            case 1:
-                outtake.clawClose();
-                if (outtake.getClawClosed()) {
-                    advance = true;
-                    raise_pos = 0;
-                }
-                break;
-            case 2:
-                //TODO: code to make it go up (need to code in Outtake)
-                switch (raise_pos) {
-                    case 0:
-                        outtake.setElbow(3); // needs to be changed
-                        raise_pos++;
-                        break;
-                    case 1:
-                        outtake.wristScore();
-                        if (outtake.checkElbow(3)) {
-                            raise_pos++;
-                        }
-                        break;
-                    case 2:
-                        outtake.setElbow(4); // needs to be set
-                        raise_pos = 3;
-                        break;
-                    case 3:
-                        break;
-                }
-                if (down && raise_pos == 3) {
-                    advance = true;
-                }
-                break;
-            case 3:
+//    public String MAKESHIFT(boolean up, boolean down) {
+//        // {"DOWN", "CLOSE", "UP", "SCORE"}
+//        boolean advance = false;
+//        switch (MAKESHIFT_pos) {
+//            case 0:
+//                //TODO: code to make it go down (need to code in Outtake)
+//                switch (lower_pos) {
+//                    case 0:
+//                        outtake.setElbow(1); // needs to be changed
+//                        lower_pos++;
+//                        break;
+//                    case 1:
+//                        outtake.wristScore();
+//                        if (outtake.checkElbow(1)) {
+//                            lower_pos++;
+//                        }
+//                        break;
+//                    case 2:
+//                        outtake.setElbow(2); // needs to be set
+//                        lower_pos = 3;
+//                        break;
+//                    case 3:
+//                        break;
+//                }
+//                if (up && lower_pos == 3) {
+//                    advance = true;
+//                }
+//                break;
+//            case 1:
+//                outtake.clawClose();
+//                if (outtake.getClawClosed()) {
+//                    advance = true;
+//                    raise_pos = 0;
+//                }
+//                break;
+//            case 2:
+//                //TODO: code to make it go up (need to code in Outtake)
+//                switch (raise_pos) {
+//                    case 0:
+//                        outtake.setElbow(3); // needs to be changed
+//                        raise_pos++;
+//                        break;
+//                    case 1:
+//                        outtake.wristScore();
+//                        if (outtake.checkElbow(3)) {
+//                            raise_pos++;
+//                        }
+//                        break;
+//                    case 2:
+//                        outtake.setElbow(4); // needs to be set
+//                        raise_pos = 3;
+//                        break;
+//                    case 3:
+//                        break;
+//                }
+//                if (down && raise_pos == 3) {
+//                    advance = true;
+//                }
+//                break;
+//            case 3:
+//
+//                if (!outtake.getClawClosed()) {
+//                    MAKESHIFT_pos = 0;
+//                    lower_pos = 0;
+//                }
+//                break;
+//        }
 
-                if (!outtake.getClawClosed()) {
-                    MAKESHIFT_pos = 0;
-                    lower_pos = 0;
-                }
-                break;
-        }
+//        if (advance) {
+//            MAKESHIFT_pos++;
+//        }
 
-        if (advance) {
-            MAKESHIFT_pos++;
-        }
-
-        return MAKESHIFT[MAKESHIFT_pos];
+//        return MAKESHIFT[MAKESHIFT_pos];
     }
 
-    public void slideControl (boolean up, boolean down, boolean out, boolean in) {
-        slides.slidesControl(up, down, out, in);
-    }
-}
+//    public void slideControl (boolean up, boolean down, boolean out, boolean in) {
+//        slides.slidesControl(up, down, out, in);
+//    }
+//}
