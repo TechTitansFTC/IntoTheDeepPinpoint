@@ -52,27 +52,10 @@ public class Outtake {
         shoulderL.setPosition(SHOULDER_L_START);
         shoulderR.setPosition(SHOULDER_R_START);
     }
-
-//    public void elbowIn(){
-//        elbow.setPosition(ELBOW_90);
-//    }
-
-    /**
-     * set elbow to a specific spot
-     * @param input - within range
-     * @// TODO: 12/5/2024 make sure all the values work
-     */
-    public void setElbow(int input) {
-
+    public void shoulderPullDown(){
+        shoulderL.setPosition(SHOULDER_L_PULLDOWN);
+        shoulderR.setPosition(SHOULDER_R_PULLDOWN);
     }
-
-    public boolean checkElbow(int input) {
-        return true;
-    }
-    public void elbowOut(){
-
-    }
-
     public void wristScore(){
         wrist.setPosition(WRIST_SCORE);
     }
@@ -88,22 +71,11 @@ public class Outtake {
     }
 
     public void elbowStart(){
-        elbow.setPosition(elbowStart());
+        elbow.setPosition(ELBOW_START);
     }
     public void elbowScore(){
         elbow.setPosition(ELBOW_SCORE);
     }
-
-    public boolean getClawClosed() {
-        if (claw.getPosition() == CLAW_CLOSE) {
-            return true;
-        }
-        return false;
-    }
-
-    //TODO: code extend and retract positions
-    //TODO: code scoring position
-
 
 
 }
