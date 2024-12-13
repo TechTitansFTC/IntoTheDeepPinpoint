@@ -17,7 +17,7 @@ public class outtakeTest extends LinearOpMode {
         Outtake out = new Outtake(hardwareMap);
         String[] servos = {"Shoulders", "Elbow", "Wrist", "Claw"};
 
-        out.init();
+        
         waitForStart();
         if (isStopRequested()) {return;}
         shoulderL.setDirection(Servo.Direction.FORWARD);

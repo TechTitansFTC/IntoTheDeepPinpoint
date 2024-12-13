@@ -36,13 +36,6 @@ public class Outtake {
         this.claw = m.servo.get("claw"); //port 1 CH
     }
 
-    public void init() {
-        shoulderL.setPosition(SHOULDER_L_START);
-        shoulderR.setPosition(SHOULDER_R_START);
-        elbow.setPosition(ELBOW_START);
-        wrist.setPosition(CLAW_CLOSE);
-        claw.setPosition(CLAW_OPEN);
-    }
 
     public void shoulderScore(){
         shoulderL.setPosition(SHOULDER_L_SCORE);
