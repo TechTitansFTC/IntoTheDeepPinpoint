@@ -26,10 +26,13 @@ public class Functions {
     };
     SpecimenScoreState specimenScore = SpecimenScoreState.SPECIMEN_PREP;
 
+
     public final String[] MAKESHIFT = {"DOWN", "CLOSE", "UP", "SCORE"};
     public int MAKESHIFT_pos = 0;
     public int lower_pos = 0;
     public int raise_pos = 0;
+    public int up = 0;
+    public int down = 0;
 
     public Functions (HardwareMap map) {
         slides = new Differential(map);
@@ -42,7 +45,7 @@ public class Functions {
         slides.init();
         hang.init();
         intake.init();
-        outtake.init();
+//        outtake.init();
     }
 
 
@@ -113,7 +116,66 @@ public class Functions {
                 break;
         }
     }
+    public void fsmup(){
+        switch (up){
+            case 0:
+                outtake.clawClose();
+                up++;
+                break;
+            case 1:
+                outtake.shoulderScore();
+                up++;
+                break;
 
+            case 2:
+                outtake.elbowScore();
+                up++;
+                break;
+
+            case 3:
+                outtake.wristScore();
+                up = 0;
+                break;
+
+            default: up = 0;
+        }
+    }
+    public void fsmdn(){
+        switch (down){
+            case 0:
+                outtake.shoulderPullDown();
+                up++;
+                break;
+
+            case 1:
+                outtake.clawOpen();
+                up++;
+                break;
+
+            case 2:
+                outtake.shoulderScore();
+                up++;
+                break;
+
+            case 3:
+                outtake.wristStart();
+                up++;
+                break;
+
+            case 4:
+                outtake.elbowStart();
+                up++;
+                break;
+
+            case 5:
+                outtake.shoulderStart();
+                up=0;
+                break;
+
+            default: up = 0;
+        }
+    }
+}
 
 //    public String MAKESHIFT(boolean up, boolean down) {
 //        // {"DOWN", "CLOSE", "UP", "SCORE"}
@@ -182,13 +244,13 @@ public class Functions {
 //                }
 //                break;
 //        }
-
+//
 //        if (advance) {
 //            MAKESHIFT_pos++;
 //        }
-
+//
 //        return MAKESHIFT[MAKESHIFT_pos];
-    }
+//    }
 
 //    public void slideControl (boolean up, boolean down, boolean out, boolean in) {
 //        slides.slidesControl(up, down, out, in);
