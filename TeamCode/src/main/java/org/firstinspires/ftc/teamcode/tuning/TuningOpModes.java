@@ -14,9 +14,9 @@ import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta;
 import org.firstinspires.ftc.teamcode.*;
 import org.firstinspires.ftc.teamcode.quickstartFiles.MecanumDrive;
 import org.firstinspires.ftc.teamcode.quickstartFiles.*;
-import org.firstinspires.ftc.teamcode.TankDrive;
-import org.firstinspires.ftc.teamcode.ThreeDeadWheelLocalizer;
-import org.firstinspires.ftc.teamcode.TwoDeadWheelLocalizer;
+import org.firstinspires.ftc.teamcode.quickstartFiles.TankDrive;
+import org.firstinspires.ftc.teamcode.quickstartFiles.ThreeDeadWheelLocalizer;
+import org.firstinspires.ftc.teamcode.quickstartFiles.TwoDeadWheelLocalizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

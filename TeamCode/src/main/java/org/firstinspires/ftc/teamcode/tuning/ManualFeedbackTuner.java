@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.*;
 import org.firstinspires.ftc.teamcode.quickstartFiles.*;
-import org.firstinspires.ftc.teamcode.TankDrive;
+import org.firstinspires.ftc.teamcode.quickstartFiles.TankDrive;
 import org.firstinspires.ftc.teamcode.quickstartFiles.ThreeDeadWheelLocalizer;
 import org.firstinspires.ftc.teamcode.quickstartFiles.TwoDeadWheelLocalizer  ;
 import org.firstinspires.ftc.teamcode.quickstartFiles.MecanumDrive;
