@@ -68,6 +68,12 @@ public class teleop extends LinearOpMode {
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
+            if(gamepad1.a){
+                robot.fsmdn();
+            }
+            if(gamepad1.b){
+                robot.fsmup();
+            }
 
 //            robot.slideControl(gamepad1.dpad_up, gamepad1.dpad_down, gamepad1.dpad_right, gamepad1.dpad_left);
         }
