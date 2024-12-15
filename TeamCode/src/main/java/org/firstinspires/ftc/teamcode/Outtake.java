@@ -4,31 +4,34 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Outtake {
-    private Servo shoulderL; // main U-D
-    private Servo shoulderR; // main U-D
-    private Servo elbow; // subset U-D
-    private Servo wrist; // L-R
-    private Servo claw;
-
-    //TODO: FIND ALL SERVO VALUES
-    private final double SHOULDER_L_SCORE = 0.2;//arm outside robot
-    private final double SHOULDER_L_START = 0.95;//arm in robot
-
-    private final double SHOULDER_R_SCORE = 0.8;//same but with othe arm
-
-    private final double SHOULDER_R_START = 0.05;
-
-    private final double SHOULDER_R_PULLDOWN = 0.9;//same but with othe arm
-
-    private final double SHOULDER_L_PULLDOWN = 0.0;
-    private final double ELBOW_START= 0.0;
-    private final double ELBOW_SCORE= 0.75;
+    public Servo shoulderL; // main U-D
+    public Servo shoulderR; // main U-D
+    public Servo elbow; // subset U-D
+    public Servo wrist; // L-R
+    public Servo claw;
 
 
-    private final double WRIST_SCORE = 0.09;
-    private final double WRIST_START = 0.73;
-    private final double CLAW_CLOSE = 0.5;//closes claw
-    private final double CLAW_OPEN = 0.0;//open claw
+    public final double SHOULDER_L_SCORE = 0.75;
+    public final double SHOULDER_R_SCORE = 0.25;
+    public final double ELBOW_SCORE= 0.25;
+    public final double WRIST_SCORE = 1;
+    //CLAW - OPEN
+
+
+    public final double SHOULDER_L_START = 0;
+    public final double SHOULDER_R_START = 1;
+    public final double ELBOW_START= 0.85;
+    public final double WRIST_START = 0.35;
+    //CLAW - OPEN
+
+    public final double SHOULDER_L_PULLDOWN = 0.1;
+    public final double SHOULDER_R_PULLDOWN = 0;
+    public final double ELBOW_PULLDOWN = 0.05;
+    public final double WRIST_PULLDOWN = 1;
+    //CLAW - CLOSED
+
+    public final double CLAW_CLOSE = 0.5;
+    public final double CLAW_OPEN = 0.0;
 
     public Outtake(HardwareMap m){
         this.shoulderL = m.servo.get("rotateML"); //port 6 CH
@@ -66,10 +69,11 @@ public class Outtake {
     public void wristStart(){
         wrist.setPosition(WRIST_START);
     }
-
-    public void clawClose(){
-        claw.setPosition(CLAW_CLOSE);
+    public void wristPulldown(){
+        wrist.setPosition(WRIST_PULLDOWN);
     }
+
+    public void clawClose() { claw.setPosition(CLAW_CLOSE); }
     public void clawOpen(){
         claw.setPosition(CLAW_OPEN);
     }
@@ -79,6 +83,9 @@ public class Outtake {
     }
     public void elbowScore(){
         elbow.setPosition(ELBOW_SCORE);
+    }
+    public void elbowPulldown(){
+        elbow.setPosition(ELBOW_PULLDOWN);
     }
 
 

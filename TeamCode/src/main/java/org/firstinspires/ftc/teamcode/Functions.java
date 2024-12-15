@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import java.util.Timer;
 
 public class Functions {
     private Outtake outtake;
@@ -9,22 +12,28 @@ public class Functions {
     private Differential slides;
 
     public enum SpecimenPickupState {
-        SPECIMEN_START,
-        SPECIMEN_EXTEND,
-        SPECIMEN_PICKUP,
-        SPECIMEN_RETRACT,
-        SPECIMEN_RAISE,
-        SPECIMEN_PREP
+        START_SHOULDER,
+        START_ELBOW,
+        START_WRIST,
+        START_CLAW
     };
-    SpecimenPickupState specimenPickup = SpecimenPickupState.SPECIMEN_START;
+    SpecimenPickupState specimenPickup = SpecimenPickupState.START_SHOULDER;
+
+    public enum SpecimenPulldownState {
+        PULLDOWN_SHOULDER,
+        PULLDOWN_ELBOW,
+        PULLDOWN_WRIST,
+        PULLDOWN_CLAW
+    };
+    SpecimenPulldownState specimenPulldown = SpecimenPulldownState.PULLDOWN_SHOULDER;
 
     public enum SpecimenScoreState {
-        SPECIMEN_PREP,
-        SPECIMEN_LOWER,
-        SPECIMEN_RELEASE,
-        SPECIMEN_RETRACT
+        SCORE_SHOULDER,
+        SCORE_ELBOW,
+        SCORE_WRIST,
+        SCORE_CLAW
     };
-    SpecimenScoreState specimenScore = SpecimenScoreState.SPECIMEN_PREP;
+    SpecimenScoreState specimenScore = SpecimenScoreState.SCORE_SHOULDER;
 
 
     public final String[] MAKESHIFT = {"DOWN", "CLOSE", "UP", "SCORE"};
@@ -33,6 +42,9 @@ public class Functions {
     public int raise_pos = 0;
     public int up = 0;
     public int down = 0;
+
+    ElapsedTime timer = new ElapsedTime();
+
 
     public Functions (HardwareMap map) {
         slides = new Differential(map);
@@ -45,58 +57,75 @@ public class Functions {
         slides.init();
         hang.init();
         intake.init();
-//        outtake.init();
+        outtake.init();
+        timer.reset();
     }
 
+    //left bumper - claw open
+    //right bumper - claw close
+    //pickup to ram position - a
+    // ram posiion to score - b
+    // score to start position - x;
 
-    /*
-    start -> send to down (need to change function)
-    extend -> need code
-    pickup -> if within range (probably needs to be moved to extend), then if extended, then close the claw
-    retract -> need code (bring the Outtake back into the robot with specimen on)
-    raise -> send up (need to change function)
-    prep -> prep for scoring (needs code)
-     */
-    public void specimenPickUp(boolean start) {
+    public void start(boolean x) {
         switch (specimenPickup) {
-            case SPECIMEN_START:
-                if (start) {
-                    slides.outtakeDown();
-                    specimenPickup = SpecimenPickupState.SPECIMEN_EXTEND;
+            case START_SHOULDER:
+                if (x) {
+                    outtake.shoulderStart();
+                    specimenPickup = SpecimenPickupState.START_ELBOW;
                 }
                 break;
-            case SPECIMEN_EXTEND:
-                //TODO: add the code to extend
-                specimenPickup = SpecimenPickupState.SPECIMEN_PICKUP;
-                break;
-            case SPECIMEN_PICKUP:
-                //TODO: implement differential encoder vars
-                if (slides.withinRange(1000, 10, true) && slides.withinRange(1000, 10, false)) {
-                    outtake.clawClose();
-                    specimenPickup = SpecimenPickupState.SPECIMEN_RETRACT;
+            case START_ELBOW:
+                if (timer.milliseconds() > 100) {
+                    outtake.elbowStart();
+                    specimenPickup = SpecimenPickupState.START_WRIST;
                 }
                 break;
-            case SPECIMEN_RETRACT:
-                //TODO: add the code to retract
+            case START_WRIST:
+                if (timer.milliseconds() > 50) {
+                    outtake.wristStart();
+                    specimenPickup = SpecimenPickupState.START_CLAW;
+                }
                 break;
-            case SPECIMEN_RAISE:
-                slides.outtakeUp();
-                specimenPickup = SpecimenPickupState.SPECIMEN_PREP;
+            case START_CLAW:
+                if (outtake.claw.getPosition() == outtake.CLAW_CLOSE) {
+                    outtake.clawOpen();
+                }
+                specimenPickup = SpecimenPickupState.START_SHOULDER;
                 break;
-            case SPECIMEN_PREP:
-                //TODO: prep for scoring
-                specimenPickup = SpecimenPickupState.SPECIMEN_START;
+        }
+    }
+
+    public void pulldown(boolean a) {
+        switch (specimenPulldown) {
+            case PULLDOWN_SHOULDER:
+                if (a) {
+                    outtake.shoulderPulldown();
+                    specimenPickup = SpecimenPulldownState.PULLDOWN_ELBOW;
+                }
+                break;
+            case PULLDOWN_ELBOW:
+                if (timer.milliseconds() > 100) {
+                    outtake.elbowStart();
+                    specimenPickup = SpecimenPickupState.START_WRIST;
+                }
+                break;
+            case PULLDOWN_WRIST:
+                if (timer.milliseconds() > 50) {
+                    outtake.wristStart();
+                    specimenPickup = SpecimenPickupState.START_CLAW;
+                }
+                break;
+            case PULLDOWN_CLAW:
+                if (outtake.claw.getPosition() == outtake.CLAW_CLOSE) {
+                    outtake.clawOpen();
+                }
+                specimenPickup = SpecimenPickupState.START_SHOULDER;
                 break;
         }
     }
 
 
-    /*
-    prep - position from pickup
-    lower - get the specimen onto bar
-    release - release it
-    retract - retract to position for pickup start
-     */
     public void specimenScore(boolean start) {
         switch (specimenScore) {
             case SPECIMEN_PREP:
