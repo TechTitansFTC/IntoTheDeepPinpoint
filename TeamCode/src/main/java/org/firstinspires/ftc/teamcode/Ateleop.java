@@ -9,7 +9,7 @@ import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp
-public class teleop extends LinearOpMode {
+public class Ateleop extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
@@ -68,14 +68,23 @@ public class teleop extends LinearOpMode {
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
-            if(gamepad1.a){
-                robot.fsmdn();
+
+            if (gamepad2.b){
+                robot.score(true);
             }
-            if(gamepad1.b){
-                robot.fsmup();
+            if (gamepad1.a) {
+                robot.pulldown(true);
+            }
+            if (gamepad1.x) {
+                robot.start(true);
+            }
+            if (gamepad2.left_bumper) {
+                robot.openClaw();
+            }
+            if (gamepad2.right_bumper) {
+                robot.closeClaw();
             }
 
-//            robot.slideControl(gamepad1.dpad_up, gamepad1.dpad_down, gamepad1.dpad_right, gamepad1.dpad_left);
         }
     }
 }
