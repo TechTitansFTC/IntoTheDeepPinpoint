@@ -39,12 +39,6 @@ public class Functions {
     SpecimenScoreState specimenScore = SpecimenScoreState.SCORE_SHOULDER;
 
     public final String[] MAKESHIFT = {"DOWN", "CLOSE", "UP", "SCORE"};
-    public int MAKESHIFT_pos = 0;
-    public int lower_pos = 0;
-    public int raise_pos = 0;
-    public int up = 0;
-    public int down = 0;
-
     ElapsedTime timer = new ElapsedTime();
 
     boolean x, a, b = false;
@@ -136,8 +130,17 @@ public class Functions {
     public void openClaw() {
         outtake.clawOpen();
     }
-
     public void closeClaw() {
         outtake.clawClose();
     }
+    public void inOpenClaw() {
+        intake.inClawOpen();
+    }
+    public void inCloseClaw() { intake.inClawClosed(); }
+    public void inOut() {
+        intake.inArmOut();
+    }
+    public void inUp() { intake.inArmUp(); }
+
+    public void
 }
