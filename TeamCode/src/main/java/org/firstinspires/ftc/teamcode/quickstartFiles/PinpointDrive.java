@@ -61,6 +61,7 @@ public class PinpointDrive extends MecanumDrive {
         you move the robot to the left.
          */
         public GoBildaPinpointDriver.EncoderDirection xDirection = GoBildaPinpointDriver.EncoderDirection.FORWARD;
+                ;
         public GoBildaPinpointDriver.EncoderDirection yDirection = GoBildaPinpointDriver.EncoderDirection.REVERSED;
 
 

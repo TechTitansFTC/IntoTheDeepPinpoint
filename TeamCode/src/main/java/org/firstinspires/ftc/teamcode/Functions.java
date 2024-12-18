@@ -50,16 +50,14 @@ public class Functions {
     boolean x, a, b = false;
 
     public Functions(HardwareMap map) {
-        slides = new Differential(map);
-        intake = new Intake(map);
-        hang = new Hang(map);
+
+
         outtake = new Outtake(map);
     }
 
     public void init() {
-        slides.init();
-        hang.init();
-        intake.init();
+
+
         outtake.init();
         timer.reset();
     }
@@ -70,92 +68,67 @@ public class Functions {
     // ram posiion to score - b
     // score to start position - x;
 
-    public void start(boolean x) {
+    public void start() {
         switch (specimenPickup) {
+            case START_CLAW:
+                outtake.clawOpen();
+                specimenPickup = SpecimenPickupState.START_SHOULDER;
+                break;
             case START_SHOULDER:
-                if (x) {
-                    outtake.shoulderStart();
-                    specimenPickup = SpecimenPickupState.START_ELBOW;
-                }
+                outtake.shoulderStart();
+                specimenPickup = SpecimenPickupState.START_ELBOW;
                 break;
             case START_ELBOW:
-                if (timer.milliseconds() > 100) {
-                    outtake.elbowStart();
-                    specimenPickup = SpecimenPickupState.START_WRIST;
-                }
+                outtake.elbowStart();
+                specimenPickup = SpecimenPickupState.START_WRIST;
                 break;
             case START_WRIST:
-                if (timer.milliseconds() > 50) {
-                    outtake.wristStart();
-                    specimenPickup = SpecimenPickupState.START_CLAW;
-                }
+                outtake.wristStart();
+                specimenPickup = SpecimenPickupState.START_CLAW;
                 break;
-            case START_CLAW:
-                if (outtake.claw.getPosition() == outtake.CLAW_CLOSE) {
-                    outtake.clawOpen();
-                }
-                specimenPickup = SpecimenPickupState.START_SHOULDER;
-                x = false;
-                break;
+
         }
     }
 
-    public void pulldown(boolean a) {
+    public void pulldown() {
         switch (specimenPulldown) {
-            case PULLDOWN_SHOULDER:
-                if (a) {
-                    outtake.shoulderPullDown();
-                    specimenPulldown = SpecimenPulldownState.PULLDOWN_ELBOW;
-                }
-                break;
             case PULLDOWN_ELBOW:
-                if (timer.milliseconds() > 100) {
-                    outtake.elbowPulldown();
-                    specimenPulldown = SpecimenPulldownState.PULLDOWN_WRIST;
-                }
+                outtake.elbowPulldown();
+                specimenPulldown = SpecimenPulldownState.PULLDOWN_WRIST;
                 break;
+            case PULLDOWN_SHOULDER:
+                outtake.shoulderPullDown();
+                specimenPulldown = SpecimenPulldownState.PULLDOWN_ELBOW;
+                break;
+
             case PULLDOWN_WRIST:
-                if (timer.milliseconds() > 50) {
-                    outtake.wristPulldown();
-                    specimenPulldown = SpecimenPulldownState.PULLDOWN_CLAW;
-                }
+                outtake.wristPulldown();
+                specimenPulldown = SpecimenPulldownState.PULLDOWN_CLAW;
                 break;
             case PULLDOWN_CLAW:
-                if (outtake.claw.getPosition() == outtake.CLAW_OPEN) {
-                    outtake.clawClose();
-                }
-                specimenPulldown = SpecimenPulldownState.PULLDOWN_ELBOW;
-                a = false;
+                outtake.clawClose();
+                specimenPulldown = SpecimenPulldownState.PULLDOWN_SHOULDER;
                 break;
         }
     }
 
-    public void score(boolean b) {
+    public void score() {
         switch (specimenScore) {
             case SCORE_SHOULDER:
-                if (b) {
-                    outtake.shoulderScore();
-                    specimenScore = SpecimenScoreState.SCORE_ELBOW;
-                }
+                outtake.shoulderScore();
+                specimenScore = SpecimenScoreState.SCORE_ELBOW;
                 break;
             case SCORE_ELBOW:
-                if (timer.milliseconds() > 100) {
-                    outtake.elbowScore();
-                    specimenScore = SpecimenScoreState.SCORE_WRIST;
-                }
+                outtake.elbowScore();
+                specimenScore = SpecimenScoreState.SCORE_WRIST;
                 break;
             case SCORE_WRIST:
-                if (timer.milliseconds() > 50) {
-                    outtake.wristScore();
-                    specimenScore = SpecimenScoreState.SCORE_CLAW;
-                }
+                outtake.wristScore();
+                specimenScore = SpecimenScoreState.SCORE_CLAW;
                 break;
             case SCORE_CLAW:
-                if (outtake.claw.getPosition() == outtake.CLAW_CLOSE) {
-                    outtake.clawOpen();
-                }
+                outtake.clawClose();
                 specimenScore = SpecimenScoreState.SCORE_SHOULDER;
-                b = false;
                 break;
         }
     }
