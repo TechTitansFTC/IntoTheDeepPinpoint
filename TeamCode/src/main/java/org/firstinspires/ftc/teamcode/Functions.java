@@ -127,6 +127,26 @@ public class Functions {
         }
     }
 
+    public void autoScore(){
+        outtake.shoulderScore();
+        outtake.elbowScore();
+        outtake.wristScore();
+        outtake.clawClose();
+    }
+    public void autoPullDown(){
+        outtake.elbowPulldown();
+        outtake.shoulderPullDown();
+        outtake.wristPulldown();
+        outtake.clawClose();
+    }
+    public void autoStart(){
+        outtake.clawOpen();
+        outtake.shoulderStart();
+        outtake.elbowStart();
+        outtake.wristStart();
+
+    }
+
     public void openClaw() {
         outtake.clawOpen();
     }

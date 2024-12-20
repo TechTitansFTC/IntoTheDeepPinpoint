@@ -45,7 +45,7 @@ public class Outtake {
         shoulderL.setPosition(SHOULDER_L_START);
         shoulderR.setPosition(SHOULDER_R_START);
         wrist.setPosition(WRIST_START);
-        claw.setPosition(CLAW_OPEN);
+        claw.setPosition(CLAW_CLOSE);
         elbow.setPosition(ELBOW_START);
     }
 
