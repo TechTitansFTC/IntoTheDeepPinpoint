@@ -13,8 +13,8 @@ public class Intake {
     //TODO: finalize intake PIVs
     public final double IN_CLAW_CLOSED = 0.15;
     public final double IN_CLAW_OPEN = 0.5;
-    public final double IN_L_START = 0.03;
-    public final double IN_L_PICK = 0.37;
+    public final double IN_L_START = 0.35;
+    public final double IN_L_PICK = 0.68;
 //    public final double IN_R_START = 0.15;
 //    public final double IN_R_PICK = 5;
 
