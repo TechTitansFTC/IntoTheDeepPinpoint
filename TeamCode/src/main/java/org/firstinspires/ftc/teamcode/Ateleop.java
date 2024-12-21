@@ -46,9 +46,7 @@ public class Ateleop extends LinearOpMode {
             // This button choice was made so that it is hard to hit on accident,
             // it can be freely changed based on preference.
             // The equivalent button is start on Xbox-style controllers.
-            if (gamepad1.options) {
-                imu.resetYaw();
-            }
+
 
             double botHeading = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
 
@@ -80,10 +78,10 @@ public class Ateleop extends LinearOpMode {
                 robot.start();
             }
             if (gamepad1.left_bumper || gamepad2.left_bumper) {
-                robot.openClaw();
+                robot.inOpenClaw();
             }
             if (gamepad1.right_bumper || gamepad2.right_bumper) {
-                robot.closeClaw();
+                robot.inCloseClaw();
             }
             if (gamepad1.dpad_up || gamepad2.dpad_up) {
                 robot.inUp();
@@ -92,10 +90,10 @@ public class Ateleop extends LinearOpMode {
                 robot.inOut();
             }
             if (gamepad1.left_trigger > 0 || gamepad2.left_trigger > 0) {
-                robot.inOpenClaw();
+                robot.openClaw();
             }
             if (gamepad1.right_trigger > 0 || gamepad2.right_trigger > 0) {
-                robot.inCloseClaw();
+                robot.closeClaw();
             }
 
         }

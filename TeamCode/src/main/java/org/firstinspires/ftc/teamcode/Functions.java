@@ -45,13 +45,13 @@ public class Functions {
 
     public Functions(HardwareMap map) {
 
-
+        intake = new Intake(map);
         outtake = new Outtake(map);
     }
 
     public void init() {
 
-
+        intake.init();
         outtake.init();
         timer.reset();
     }
@@ -128,16 +128,18 @@ public class Functions {
     }
 
     public void autoScore(){
+        outtake.clawClose();
         outtake.shoulderScore();
         outtake.elbowScore();
         outtake.wristScore();
-        outtake.clawClose();
+
     }
     public void autoPullDown(){
+        outtake.clawClose();
         outtake.elbowPulldown();
         outtake.shoulderPullDown();
         outtake.wristPulldown();
-        outtake.clawClose();
+
     }
     public void autoStart(){
         outtake.clawOpen();
@@ -156,7 +158,9 @@ public class Functions {
     public void inOpenClaw() {
         intake.inClawOpen();
     }
-    public void inCloseClaw() { intake.inClawClosed(); }
+    public void inCloseClaw() {
+        intake.inClawClosed();
+    }
     public void inOut() {
         intake.inArmOut();
     }

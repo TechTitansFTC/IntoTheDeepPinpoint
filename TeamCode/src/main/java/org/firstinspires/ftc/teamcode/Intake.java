@@ -14,9 +14,9 @@ public class Intake {
     public final double IN_CLAW_CLOSED = 0.15;
     public final double IN_CLAW_OPEN = 0.5;
     public final double IN_L_START = 0.35;
-    public final double IN_L_PICK = 0.68;
-//    public final double IN_R_START = 0.15;
-//    public final double IN_R_PICK = 5;
+    public final double IN_L_PICK = 0.7;
+//    public final double IN_R_START = 0.65;
+//    public final double IN_R_PICK = 0.32;
 
     public Intake (HardwareMap map) {
         this.inClaw = (Servo) map.get("inClaw");
@@ -34,7 +34,13 @@ public class Intake {
 
     public void inClawOpen() {inClaw.setPosition(IN_CLAW_OPEN);}
 
-    public void inArmUp() {lRotate.setPosition(IN_L_START);}
+    public void inArmUp() {
+        lRotate.setPosition(IN_L_START);
+//        rRotate.setPosition(IN_R_START);
+    }
 
-    public void inArmOut() {lRotate.setPosition(IN_L_PICK);}
+    public void inArmOut() {
+        lRotate.setPosition(IN_L_PICK);
+//        rRotate.setPosition(IN_R_PICK);
+    }
 }
